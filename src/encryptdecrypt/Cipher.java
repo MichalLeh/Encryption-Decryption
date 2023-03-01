@@ -25,6 +25,9 @@ public class Cipher {
          setAlgorithm();
          getResult();
      }
+     /**
+     * Check if argument has a value
+     */
      private void checkIfArgHasValue(String[] args){
         for (int i = 0; i < args.length - 1; i++){
             if (args[i].contains("-") && args[i + 1].contains("-")){
@@ -32,6 +35,9 @@ public class Cipher {
             }
         }
     }
+     /**
+     * Get the result of the en(de)cryption process
+     */
     public void getResult(){
         String result = algorithm.execute(data, key);
         if (out.isEmpty()){
@@ -40,6 +46,9 @@ public class Cipher {
             writeDataIntoFile(result);
         }
     }
+     /**
+     * Set an algorithm
+     */
     private void setAlgorithm() {
         if (mode.equals("enc") && alg.equals("unicode")) {
             algorithm = new EncryptUnicodeAlgorithm();
@@ -51,6 +60,11 @@ public class Cipher {
             algorithm = new DecryptShiftAlgorithm();
         }
     }
+     /**
+     * Read data
+     *
+     * @return Data to be processed, otherwise throws an error
+     */
     public String readDataFromFile() {
         File file = new File(in);
         try (Scanner scanner = new Scanner(file)) {
@@ -62,6 +76,11 @@ public class Cipher {
         }
         return data;
     }
+     /**
+     * Write the content to a file.
+     *
+     * @param result The content to be written into the file.
+     */
     public void writeDataIntoFile(String result) {
         File file = new File(out);
         try (FileWriter writer = new FileWriter(file)) {
@@ -70,6 +89,11 @@ public class Cipher {
             System.out.printf("File not found");
         }
     }
+     /**
+     * Check and set parameters
+     *
+     * @param args Array of parameters to be processed
+     */
     private void setParameters(String[] args){
         for (int i = 0; i < args.length - 1; i += 2) {
             if ("-mode".equals(args[i]) && ("enc".equals(args[i + 1]) || "dec".equals(args[i + 1]))) {
