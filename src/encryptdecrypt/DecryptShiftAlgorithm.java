@@ -1,6 +1,14 @@
 package encryptdecrypt;
 
-public class DecryptShiftAlgorithm implements Algorithm{
+public class DecryptShiftAlgorithm implements Algorithm {
+       /**
+     * Decode the current char by shifting each letter by the key
+     * from "z" to "a" and from "Z" to "A".
+     *
+     * @param data Data to be encoded
+     * @param key  Key to encode the message
+     * @return The encoded data as a String
+     */
     public String execute(String data, int key) {
         StringBuilder resultCipher = new StringBuilder();
         char endLetter;
